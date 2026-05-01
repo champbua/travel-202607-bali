@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali 2026 — Champ's Trip</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1B6B45;
+  --green-light: #EAF4EE;
+  --orange: #C4683A;
+  --sand: #FDF8F0;
+  --dark: #1C1C1E;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --confirmed: #1B6B45;
+  --pending: #B45309;
+  /* Day accents — muted earth tones */
+  --d1: #1B6B45;
+  --d2: #2B7A56;
+  --d3: #8B7045;
+  --d4: #3D7A9F;
+  --d5: #B5623E;
+  --d6: #7A8A9A;
+  --d1-bg: #EAF4EE;
+  --d2-bg: #E8F3ED;
+  --d3-bg: #F5EFE7;
+  --d4-bg: #E8F0F5;
+  --d5-bg: #F5EBE6;
+  --d6-bg: #EEF0F2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--sand);
+  color: var(--dark);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, #0D4429 0%, #1B6B45 55%, #2D8A5A 100%);
+  color: white;
+  padding: 40px 20px 32px;
+  text-align: center;
+}
+.hero-flag { font-size: 36px; margin-bottom: 8px; }
+.hero h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.hero h1 span { color: #A8E6C3; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 6px; font-weight: 400; letter-spacing: 0.5px; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px; }
+.hero-tag {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.hero-dates {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 12px;
+}
+.hero-dates .leg { text-align: center; }
+.hero-dates .leg .time { font-size: 17px; font-weight: 700; }
+.hero-dates .leg .label { color: rgba(255,255,255,0.65); font-size: 11px; }
+.hero-dates .arrow { display: flex; align-items: center; color: rgba(255,255,255,0.5); font-size: 18px; }
+
+/* ── HOTEL BANNER ── */
+.hotel-banner {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.hotel-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.hotel-card:last-child { border-bottom: none; }
+.hotel-icon { font-size: 22px; }
+.hotel-info { flex: 1; }
+.hotel-info .name { font-weight: 700; font-size: 13px; color: var(--dark); }
+.hotel-info .nights { font-size: 11px; color: var(--muted); }
+.hotel-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--confirmed);
+  background: var(--green-light);
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ── STICKY NAV ── */
+.day-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.day-nav::-webkit-scrollbar { display: none; }
+.day-nav-inner {
+  display: flex;
+  padding: 0 12px;
+  gap: 0;
+  min-width: max-content;
+}
+.day-tab {
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+}
+.day-tab:hover { color: var(--green); }
+.day-tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+/* ── SECTIONS ── */
+.section { padding: 0 16px; margin-bottom: 24px; }
+.section:first-of-type { margin-top: 20px; }
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 12px;
+}
+.day-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.day-badge .num { font-size: 16px; font-weight: 800; color: white; line-height: 1; }
+.day-badge .lbl { font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; }
+.day-info { flex: 1; }
+.day-info .day-title { font-size: 16px; font-weight: 700; }
+.day-info .day-date { font-size: 12px; color: var(--muted); font-weight: 400; }
+.day-vibe {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 20px;
+}
+
+/* ── TIMELINE ── */
+.timeline { position: relative; }
+.tl-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 0;
+  position: relative;
+}
+.tl-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 36px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--border);
+}
+.tl-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  background: white;
+  position: relative;
+  z-index: 1;
+}
+.tl-content {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.tl-content .time-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+}
+.tl-content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 3px;
+}
+.tl-content p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tl-booked {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+.booked-confirmed { background: #DCFCE7; color: #15803D; }
+.booked-paid { background: #DBEAFE; color: #1D4ED8; }
+.booked-pending { background: #FEF3C7; color: #B45309; }
+
+.qr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.qr-row img {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.qr-label { font-size: 11px; color: var(--muted); }
+.qr-label strong { display: block; font-size: 12px; color: var(--dark); font-weight: 600; }
+
+/* ── BOOKING DASHBOARD ── */
+.booking-section { padding: 0 16px 24px; }
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.booking-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.booking-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.booking-card-header .bk-icon { font-size: 20px; }
+.booking-card-header .bk-name { font-weight: 700; font-size: 14px; }
+.booking-card-header .bk-status {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.status-confirmed { background: #DCFCE7; color: #15803D; }
+.status-paid { background: #DBEAFE; color: #1D4ED8; }
+.booking-card-body { padding: 10px 14px; }
+.bk-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+.bk-row .bk-key { color: var(--muted); font-weight: 500; }
+.bk-row .bk-val { font-weight: 600; color: var(--dark); text-align: right; max-width: 60%; }
+.bk-ref {
+  font-family: monospace;
+  font-size: 11px;
+  background: var(--sand);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* ── TIPS ── */
+.tips-grid { display: grid; gap: 10px; }
+.tip-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+}
+.tip-icon { font-size: 20px; flex-shrink: 0; }
+.tip-content .tip-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.tip-content p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── QR GRID ── */
+.qr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.qr-item {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 10px 8px;
+  text-align: center;
+}
+.qr-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.qr-item .qr-name { font-size: 10px; font-weight: 600; color: var(--dark); line-height: 1.3; }
+.qr-item .qr-day { font-size: 10px; color: var(--muted); }
+
+/* ── DIVIDER ── */
+.divider {
+  height: 8px;
+  background: var(--sand);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 4px -16px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 24px 16px 40px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.footer .footer-flag { font-size: 28px; margin-bottom: 4px; }
+
+/* Day colors */
+.d1 { background: var(--d1); }
+.d2 { background: var(--d2); }
+.d3 { background: var(--d3); }
+.d4 { background: var(--d4); }
+.d5 { background: var(--d5); }
+.d6 { background: var(--d6); }
+.d1-bg { background: var(--d1-bg); }
+.d2-bg { background: var(--d2-bg); }
+.d3-bg { background: var(--d3-bg); }
+.d4-bg { background: var(--d4-bg); }
+.d5-bg { background: var(--d5-bg); }
+.d6-bg { background: var(--d6-bg); }
+.text-d1 { color: var(--d1); }
+.text-d2 { color: var(--d2); }
+.text-d3 { color: var(--d3); }
+.text-d4 { color: var(--d4); }
+.text-d5 { color: var(--d5); }
+.text-d6 { color: var(--d6); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-flag">🌴</div>
+  <h1>Bali <span>2026</span></h1>
+  <div class="hero-sub">A SLOW JOURNEY THROUGH BALI · 25–30 JULY 2026</div>
+  <div class="hero-tags">
+    <span class="hero-tag">☕ Specialty Coffee</span>
+    <span class="hero-tag">🍺 Craft Beer</span>
+    <span class="hero-tag">🍷 Wine</span>
+    <span class="hero-tag">🏛️ Culture</span>
+    <span class="hero-tag">🦥 No Rush</span>
+  </div>
+  <div style="margin-top:14px; background:rgba(255,255,255,0.1); border-radius:10px; padding:11px 14px; text-align:left; width:100%;">
+    <div style="font-size:9px; letter-spacing:1.5px; color:rgba(255,255,255,0.55); font-weight:700; margin-bottom:4px;">✈ OUTBOUND · SAT 25 JUL</div>
+    <div style="font-weight:700; font-size:13px;">SQ707 &nbsp; BKK 12:15 → SIN 15:50</div>
+    <div style="font-size:11px; color:rgba(255,255,255,0.65); margin-top:2px;">↳ 1h 55m · SQ946 &nbsp; SIN 17:45 → DPS 20:25</div>
+    <div style="border-top:1px solid rgba(255,255,255,0.15); margin:8px 0;"></div>
+    <div style="font-size:9px; letter-spacing:1.5px; color:rgba(255,255,255,0.55); font-weight:700; margin-bottom:4px;">✈ RETURN · THU 30 JUL</div>
+    <div style="font-weight:700; font-size:13px;">SQ939 &nbsp; DPS 13:15 → SIN 16:00</div>
+    <div style="font-size:11px; color:rgba(255,255,255,0.65); margin-top:2px;">↳ 1h 30m · SQ714 &nbsp; SIN 17:30 → BKK 19:00</div>
+  </div>
+</div>
+
+<!-- HOTELS -->
+<div class="hotel-banner">
+  <div class="hotel-card">
+    <div class="hotel-icon">🌿</div>
+    <div class="hotel-info">
+      <div class="name">Sthala, a Tribute Portfolio Hotel</div>
+      <div class="nights">Jul 25–27 · 2 nights · Ubud</div>
+    </div>
+    <div class="hotel-badge">TITANIUM ✦</div>
+  </div>
+  <div class="hotel-card">
+    <div class="hotel-icon">🌊</div>
+    <div class="hotel-info">
+      <div class="name">Renaissance Bali Uluwatu</div>
+      <div class="nights">Jul 27–30 · 3 nights · Uluwatu</div>
+    </div>
+    <div class="hotel-badge">TITANIUM ✦</div>
+  </div>
+</div>
+
+<!-- DAY NAV -->
+<nav class="day-nav" id="dayNav">
+  <div class="day-nav-inner">
+    <a href="#day1" class="day-tab active">Sat 25</a>
+    <a href="#day2" class="day-tab">Sun 26</a>
+    <a href="#day3" class="day-tab">Mon 27</a>
+    <a href="#day4" class="day-tab">Tue 28</a>
+    <a href="#day5" class="day-tab">Wed 29</a>
+    <a href="#day6" class="day-tab">Thu 30</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ DAY 1 ═══════════════════════ -->
+<div id="day1" class="section" data-day="1">
+  <div class="day-header">
+    <div class="day-badge d1"><span class="num">1</span><span class="lbl">SAT</span></div>
+    <div class="day-info">
+      <div class="day-title">Arrival in Bali 🛬</div>
+      <div class="day-date">Saturday, 25 July 2026</div>
+    </div>
+    <div class="day-vibe d1-bg text-d1">Settle in</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">✈️</div>
+      <div class="tl-content">
+        <div class="time-label">20:25</div>
+        <h4>Arrive Ngurah Rai Airport (DPS)</h4>
+        <p>Singapore Airlines SQ707 BKK→SIN, connecting SQ946 SIN→DPS. Immigration, bag claim, meet driver at Arrivals.</p>
+        <div class="qr-row">
+          <img data-qr="dps" alt="Map">
+          <div class="qr-label"><strong>Ngurah Rai Airport</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🚗</div>
+      <div class="tl-content">
+        <div class="time-label">~21:00</div>
+        <h4>Private Transfer → Ubud</h4>
+        <p>Toyota Alphard, ~1.5 hrs. Pre-booked. Sit back, enjoy the night drive through the island.</p>
+        <span class="tl-booked booked-confirmed">✓ Pre-booked</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌿</div>
+      <div class="tl-content">
+        <div class="time-label">~22:30</div>
+        <h4>Check-in — Sthala Ubud</h4>
+        <p>Arrive, check in as Titanium Elite. Expect late welcome. Drop bags, breathe the jungle air.</p>
+        <div class="qr-row">
+          <img data-qr="sthala" alt="Map">
+          <div class="qr-label"><strong>Sthala Ubud</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍹</div>
+      <div class="tl-content">
+        <div class="time-label">Late night</div>
+        <h4>Hotel Bar — Unwind</h4>
+        <p>Nightcap at the hotel bar. Easy start — tomorrow is all yours.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ DAY 2 ═══════════════════════ -->
+<div id="day2" class="section" data-day="2">
+  <div class="day-header">
+    <div class="day-badge d2"><span class="num">2</span><span class="lbl">SUN</span></div>
+    <div class="day-info">
+      <div class="day-title">Ubud Wander ☕🌳</div>
+      <div class="day-date">Sunday, 26 July 2026</div>
+    </div>
+    <div class="day-vibe d2-bg text-d2">Coffee & Spa</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🍳</div>
+      <div class="tl-content">
+        <div class="time-label">Morning (your pace)</div>
+        <h4>Sleep In + Hotel Breakfast</h4>
+        <p>No alarms. Start when ready. Sthala's breakfast in the open-air space with jungle view.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">☕</div>
+      <div class="tl-content">
+        <div class="time-label">~10:00</div>
+        <h4>Seniman Coffee Studio</h4>
+        <p>One of Ubud's finest specialty coffee spots. Seasonal single-origin espresso, calm vibe, great people-watching. ~30–45 min.</p>
+        <div class="qr-row">
+          <img data-qr="seniman" alt="Map">
+          <div class="qr-label"><strong>Seniman Coffee</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🐒</div>
+      <div class="tl-content">
+        <div class="time-label">~11:00</div>
+        <h4>Sacred Monkey Forest Sanctuary</h4>
+        <p>Enter from the South Gate (Nyuh Kuning). Quieter entry, lush path, ancient temples. ~45–60 min walk through.</p>
+        <p style="margin-top:4px; font-size:11px; color:#B45309;">💡 Tip: Keep bags closed, remove sunglasses. Don't feed the monkeys.</p>
+        <div class="qr-row">
+          <img data-qr="monkeyforest" alt="Map">
+          <div class="qr-label"><strong>Monkey Forest South Gate</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍽️</div>
+      <div class="tl-content">
+        <div class="time-label">~13:00</div>
+        <h4>Lunch at WAMM</h4>
+        <p>Warung Artisan Modern Masakan — modern Balinese kitchen with great craft drinks. Relaxed, no rush.</p>
+        <div class="qr-row">
+          <img data-qr="wamm" alt="Map">
+          <div class="qr-label"><strong>WAMM Ubud</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🏊</div>
+      <div class="tl-content">
+        <div class="time-label">~14:30–15:30</div>
+        <h4>Back to Hotel — Pool & Rest</h4>
+        <p>Return to Sthala. Lounge by the pool or nap before spa. Recovery is part of the itinerary.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">💆</div>
+      <div class="tl-content">
+        <div class="time-label">16:00</div>
+        <h4>Tahara Spa — 90 min Couples Treatment</h4>
+        <p>Booked at Sthala for 2 pax, jungle-view room. 90-minute treatment. The perfect afternoon reset.</p>
+        <span class="tl-booked booked-confirmed">✓ Booked · 2 Adults · Jungle View Room</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🔥</div>
+      <div class="tl-content">
+        <div class="time-label">19:00</div>
+        <h4>Dinner — Batubara Wood Fire</h4>
+        <p>Live-fire cooking, beautiful plating, excellent cocktails. One of Ubud's most atmospheric dinner spots.</p>
+        <span class="tl-booked booked-confirmed">✓ Reserved · 19:00</span>
+        <div class="qr-row">
+          <img data-qr="batubara" alt="Map">
+          <div class="qr-label"><strong>Batubara Wood Fire</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ DAY 3 ═══════════════════════ -->
+<div id="day3" class="section" data-day="3">
+  <div class="day-header">
+    <div class="day-badge d3"><span class="num">3</span><span class="lbl">MON</span></div>
+    <div class="day-info">
+      <div class="day-title">Ubud → Uluwatu 🚗🍺</div>
+      <div class="day-date">Monday, 27 July 2026</div>
+    </div>
+    <div class="day-vibe d3-bg text-d3">Moving Day</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🍳</div>
+      <div class="tl-content">
+        <div class="time-label">Morning</div>
+        <h4>Hotel Breakfast + Pack & Checkout</h4>
+        <p>Leisurely last breakfast at Sthala. Pack up and settle checkout. Keep bags with the hotel until pickup.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🏛️</div>
+      <div class="tl-content">
+        <div class="time-label">~11:30 (en route)</div>
+        <h4>Stop: Pura Puseh Desa Batuan</h4>
+        <p>Ancient 10th-century temple, one of Bali's oldest. Beautifully preserved, rarely crowded. ~30–40 min stop on the way south. Sarong provided at entrance.</p>
+        <div class="qr-row">
+          <img data-qr="batuan" alt="Map">
+          <div class="qr-label"><strong>Pura Puseh Desa Batuan</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🚗</div>
+      <div class="tl-content">
+        <div class="time-label">11:30 pickup</div>
+        <h4>Private Car Charter · 6 Hours</h4>
+        <p>Sthala pickup → Batuan Temple → Black Sand Brewery → Renaissance Uluwatu. Booked via Klook.</p>
+        <span class="tl-booked booked-confirmed">✓ Klook #NSW504313</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍺</div>
+      <div class="tl-content">
+        <div class="time-label">~13:30</div>
+        <h4>Lunch + Craft Beer — Black Sand Brewery</h4>
+        <p>Bali's best craft brewery in Canggu. Rotating taps, hearty food, industrial-cool vibe. Perfect midday pitstop before the final stretch south.</p>
+        <div class="qr-row">
+          <img data-qr="blacksand" alt="Map">
+          <div class="qr-label"><strong>Black Sand Brewery</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌊</div>
+      <div class="tl-content">
+        <div class="time-label">~16:30</div>
+        <h4>Check-in — Renaissance Bali Uluwatu</h4>
+        <p>Arrive, check in as Titanium Elite. At check-in, arrange: scooter rental for Tue, private car for Tue evening, spa booking if needed, airport transfer for Thu.</p>
+        <span class="tl-booked booked-confirmed">✓ Titanium Elite — 3 nights</span>
+        <div class="qr-row">
+          <img data-qr="renaissance" alt="Map">
+          <div class="qr-label"><strong>Renaissance Uluwatu</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍷</div>
+      <div class="tl-content">
+        <div class="time-label">19:00</div>
+        <h4>Dinner — Double Ikat, Renaissance</h4>
+        <p>On-property restaurant. Request <strong>indoor air-conditioned seating</strong>, mention Titanium status for a welcome touch. Wine: check if Free Flow includes imported reds. Fallback: Bodega Norton Barrel Select Malbec.</p>
+        <span class="tl-booked booked-confirmed">✓ Ref: #DPSUW-4YNV8A397A8J</span>
+        <div class="qr-row">
+          <img data-qr="doubleikat" alt="Map">
+          <div class="qr-label"><strong>Double Ikat, Renaissance</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ DAY 4 ═══════════════════════ -->
+<div id="day4" class="section" data-day="4">
+  <div class="day-header">
+    <div class="day-badge d4"><span class="num">4</span><span class="lbl">TUE</span></div>
+    <div class="day-info">
+      <div class="day-title">Uluwatu Culture Day 🏯🔥</div>
+      <div class="day-date">Tuesday, 28 July 2026</div>
+    </div>
+    <div class="day-vibe d4-bg text-d4">Scooter + Kecak</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🍳</div>
+      <div class="tl-content">
+        <div class="time-label">Morning</div>
+        <h4>Hotel Breakfast</h4>
+        <p>Fuel up — today is the trip's most active day. Still slow, but you'll cover some ground.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🛵</div>
+      <div class="tl-content">
+        <div class="time-label">~09:30</div>
+        <h4>Rent Scooter from Hotel</h4>
+        <p>Arrange with Renaissance concierge the night before. Morning freedom: ride at your own pace. Helmet on, sunscreen on.</p>
+        <p style="margin-top:4px; font-size:11px; color:#B45309;">💡 Tip: Start before 10am to beat midday heat at GWK.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🦅</div>
+      <div class="tl-content">
+        <div class="time-label">~10:00</div>
+        <h4>GWK Cultural Park</h4>
+        <p>First time in Bali — this is unmissable. The 121m Garuda Wisnu Kencana statue is jaw-dropping. Beautifully designed grounds, cultural shows, iconic Bali landmark.</p>
+        <p style="margin-top:4px; font-size:11px; color:#B45309;">💡 Allow 1.5–2 hours. Shop closes ~17:00.</p>
+        <div class="qr-row">
+          <img data-qr="gwk" alt="Map">
+          <div class="qr-label"><strong>GWK Cultural Park</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍜</div>
+      <div class="tl-content">
+        <div class="time-label">~12:30</div>
+        <h4>Lunch — Local Balinese Near GWK</h4>
+        <p>Ask the hotel to recommend a casual warung near GWK. Nasi campur, sate lilit, fresh coconut. Authentic and unpretentious.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">☕</div>
+      <div class="tl-content">
+        <div class="time-label">~14:00</div>
+        <h4>BGS Bali Coffee</h4>
+        <p>Specialty coffee stop in Uluwatu. Single-origin, great roasts, relaxed setting. Wind down from the morning ride.</p>
+        <div class="qr-row">
+          <img data-qr="bgs" alt="Map">
+          <div class="qr-label"><strong>BGS Bali Coffee</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🏖️</div>
+      <div class="tl-content">
+        <div class="time-label">~15:30</div>
+        <h4>Return Hotel — Pool / Beach Club</h4>
+        <p>Scooter back. Afternoon at the hotel. Pool, cliff views, drinks. Recharge before the evening.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🚗</div>
+      <div class="tl-content">
+        <div class="time-label">~17:00</div>
+        <h4>Private Car — Kecak Area</h4>
+        <p>Hotel arranges car for the evening. First stop: pre-dinner drinks near Uluwatu Temple.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍸</div>
+      <div class="tl-content">
+        <div class="time-label">~17:15</div>
+        <h4>Pre-Dinner Drinks (Optional · Flexible)</h4>
+        <p>Options near Uluwatu Temple: <strong>The Cashew Tree</strong> (casual, craft cocktails, Instagram-lovely views) · <strong>Rock Bar</strong> (iconic cliffside, pricey but worth a drink) · <strong>Ulu Cliffhouse</strong> (pool club vibes). Choose on the day.</p>
+        <div class="qr-row">
+          <img data-qr="cashew" alt="Map">
+          <div class="qr-label"><strong>The Cashew Tree</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🎭</div>
+      <div class="tl-content">
+        <div class="time-label">18:00</div>
+        <h4>Kecak & Fire Dance — Uluwatu Temple</h4>
+        <p>One of Bali's most iconic experiences. The sunset Kecak performance at Pura Luhur Uluwatu — 100+ chanting performers, fire dancers, ocean backdrop. Arrive 15 min early for seats.</p>
+        <span class="tl-booked booked-paid">✓ Klook #CVC342413 — Paid</span>
+        <div class="qr-row">
+          <img data-qr="uluwatu" alt="Map">
+          <div class="qr-label"><strong>Uluwatu Temple</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🍴</div>
+      <div class="tl-content">
+        <div class="time-label">20:00</div>
+        <h4>Dinner — MASON. Uluwatu</h4>
+        <p>Refined modern cuisine, excellent wine list, sophisticated Uluwatu atmosphere. No rush — table is yours for the evening.</p>
+        <span class="tl-booked booked-confirmed">✓ Ref: #5587JL39SKTU · 20:00</span>
+        <div class="qr-row">
+          <img data-qr="mason" alt="Map">
+          <div class="qr-label"><strong>MASON. Uluwatu</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ DAY 5 ═══════════════════════ -->
+<div id="day5" class="section" data-day="5">
+  <div class="day-header">
+    <div class="day-badge d5"><span class="num">5</span><span class="lbl">WED</span></div>
+    <div class="day-info">
+      <div class="day-title">El Kabron All Day 🌊🌅</div>
+      <div class="day-date">Wednesday, 29 July 2026</div>
+    </div>
+    <div class="day-vibe d5-bg text-d5">Full Hedonism</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🍳</div>
+      <div class="tl-content">
+        <div class="time-label">Morning</div>
+        <h4>Late Hotel Breakfast</h4>
+        <p>Sleep in, eat well. Today has one destination and zero obligations.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">☕</div>
+      <div class="tl-content">
+        <div class="time-label">~10:00 (optional)</div>
+        <h4>The Cashew Tree — Coffee & Brunch</h4>
+        <p>If you're feeling social before the beach club. Lovely garden café, açaí bowls, specialty coffee, relaxed terrace. 15 min from El Kabron.</p>
+        <div class="qr-row">
+          <img data-qr="cashew" alt="Map">
+          <div class="qr-label"><strong>The Cashew Tree</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🏖️</div>
+      <div class="tl-content">
+        <div class="time-label">13:00</div>
+        <h4>El Kabron — Hedonism Lounge · VIP Oceanfront Daybed</h4>
+        <p>Check into your private VIP daybed perched above the Indian Ocean. Ocean-facing, infinity views, dedicated service. Drinks, tapas, afternoon vibes — stay as long as you like.</p>
+        <span class="tl-booked booked-paid">✓ Arnan Buasaengtham · 2 Adults · Deposit Paid</span>
+        <div class="qr-row">
+          <img data-qr="elkabron" alt="Map">
+          <div class="qr-label"><strong>El Kabron</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌅</div>
+      <div class="tl-content">
+        <div class="time-label">~18:00</div>
+        <h4>El Kabron — Sunset Theater · Dining Table</h4>
+        <p>Transition from daybed to your dinner table as the sun drops. Mediterranean-Balinese menu, exceptional wine, golden-hour views. The perfect Bali evening — no moving required.</p>
+        <span class="tl-booked booked-paid">✓ Booked · Deposit Paid</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🚗</div>
+      <div class="tl-content">
+        <div class="time-label">~21:00+</div>
+        <h4>Return to Renaissance</h4>
+        <p>Car from El Kabron back to hotel. Arrange with hotel or Grab. Pack lightly before sleeping — departure tomorrow.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ DAY 6 ═══════════════════════ -->
+<div id="day6" class="section" data-day="6">
+  <div class="day-header">
+    <div class="day-badge d6"><span class="num">6</span><span class="lbl">THU</span></div>
+    <div class="day-info">
+      <div class="day-title">Departure 🛫</div>
+      <div class="day-date">Thursday, 30 July 2026</div>
+    </div>
+    <div class="day-vibe d6-bg text-d6">Fly Home</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🍳</div>
+      <div class="tl-content">
+        <div class="time-label">Morning</div>
+        <h4>Final Hotel Breakfast</h4>
+        <p>Last morning in Bali. Eat well, enjoy the view. Checkout time is usually 12:00 — request late checkout as Titanium if needed.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🧳</div>
+      <div class="tl-content">
+        <div class="time-label">~10:00</div>
+        <h4>Pack + Checkout</h4>
+        <p>Settle bill, collect luggage. Arrange airport transfer with hotel if not done already.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🚗</div>
+      <div class="tl-content">
+        <div class="time-label">~10:30</div>
+        <h4>Transfer to Ngurah Rai Airport</h4>
+        <p>~45–60 min drive from Uluwatu. Allow time for Bali traffic. SQ958 departs at 13:15.</p>
+        <p style="margin-top:4px; font-size:11px; color:#B45309;">💡 International check-in closes ~90 min before. Aim to arrive by 11:00.</p>
+        <div class="qr-row">
+          <img data-qr="dps" alt="Map">
+          <div class="qr-label"><strong>Ngurah Rai Airport</strong>Tap for Google Maps</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">✈️</div>
+      <div class="tl-content">
+        <div class="time-label">13:15</div>
+        <h4>Depart DPS → BKK</h4>
+        <p>SQ939 DPS→SIN, then SQ714 SIN 17:30→BKK 19:00. Sawubona, Bali. 🌴</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ BOOKINGS ═══════════════════════ -->
+<div class="booking-section" id="bookings">
+  <div style="height:16px"></div>
+  <div class="section-title">📋 All Bookings & References</div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🚗</span>
+      <span class="bk-name">Airport Transfer · Jul 25</span>
+      <span class="bk-status status-confirmed">Confirmed</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Vehicle</span><span class="bk-val">Toyota Alphard</span></div>
+      <div class="bk-row"><span class="bk-key">Route</span><span class="bk-val">DPS → Sthala Ubud</span></div>
+      <div class="bk-row"><span class="bk-key">Pickup</span><span class="bk-val">Arrivals Hall after SQ955 lands ~20:25</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">💆</span>
+      <span class="bk-name">Tahara Spa · Jul 26</span>
+      <span class="bk-status status-confirmed">Booked</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Date & Time</span><span class="bk-val">Sat, 26 Jul · 16:00</span></div>
+      <div class="bk-row"><span class="bk-key">Duration</span><span class="bk-val">90 minutes</span></div>
+      <div class="bk-row"><span class="bk-key">Pax</span><span class="bk-val">2 Adults</span></div>
+      <div class="bk-row"><span class="bk-key">Room</span><span class="bk-val">Jungle View</span></div>
+      <div class="bk-row"><span class="bk-key">Location</span><span class="bk-val">Sthala Ubud (on-property)</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🔥</span>
+      <span class="bk-name">Batubara Wood Fire · Jul 26</span>
+      <span class="bk-status status-confirmed">Reserved</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Date & Time</span><span class="bk-val">Sun, 26 Jul · 19:00</span></div>
+      <div class="bk-row"><span class="bk-key">Location</span><span class="bk-val">Ubud</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🚗</span>
+      <span class="bk-name">Private Car Charter · Jul 27</span>
+      <span class="bk-status status-confirmed">Klook</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Reference</span><span class="bk-val"><span class="bk-ref">NSW504313</span></span></div>
+      <div class="bk-row"><span class="bk-key">Pickup</span><span class="bk-val">Sthala Ubud · 11:30</span></div>
+      <div class="bk-row"><span class="bk-key">Duration</span><span class="bk-val">6 hours</span></div>
+      <div class="bk-row"><span class="bk-key">Route</span><span class="bk-val">Batuan → Canggu → Uluwatu</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🍷</span>
+      <span class="bk-name">Double Ikat · Jul 27</span>
+      <span class="bk-status status-confirmed">Confirmed</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Reference</span><span class="bk-val"><span class="bk-ref">DPSUW-4YNV8A397A8J</span></span></div>
+      <div class="bk-row"><span class="bk-key">Date & Time</span><span class="bk-val">Mon, 27 Jul · 19:00</span></div>
+      <div class="bk-row"><span class="bk-key">Location</span><span class="bk-val">Renaissance Bali Uluwatu</span></div>
+      <div class="bk-row"><span class="bk-key">Note</span><span class="bk-val">Request indoor A/C seating, mention Titanium</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🎭</span>
+      <span class="bk-name">Kecak & Fire Dance · Jul 28</span>
+      <span class="bk-status status-paid">Klook · Paid</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Reference</span><span class="bk-val"><span class="bk-ref">CVC342413</span></span></div>
+      <div class="bk-row"><span class="bk-key">Date & Time</span><span class="bk-val">Tue, 28 Jul · 18:00</span></div>
+      <div class="bk-row"><span class="bk-key">Location</span><span class="bk-val">Pura Luhur Uluwatu Temple</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🍴</span>
+      <span class="bk-name">MASON. Uluwatu · Jul 28</span>
+      <span class="bk-status status-confirmed">Confirmed</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Reference</span><span class="bk-val"><span class="bk-ref">5587JL39SKTU</span></span></div>
+      <div class="bk-row"><span class="bk-key">Date & Time</span><span class="bk-val">Tue, 28 Jul · 20:00</span></div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <div class="booking-card-header">
+      <span class="bk-icon">🌊</span>
+      <span class="bk-name">El Kabron · Jul 29</span>
+      <span class="bk-status status-paid">Deposit Paid</span>
+    </div>
+    <div class="booking-card-body">
+      <div class="bk-row"><span class="bk-key">Name</span><span class="bk-val">Arnan Buasaengtham (Champ)</span></div>
+      <div class="bk-row"><span class="bk-key">Date</span><span class="bk-val">Wed, 29 Jul · 13:00</span></div>
+      <div class="bk-row"><span class="bk-key">Pax</span><span class="bk-val">2 Adults</span></div>
+      <div class="bk-row"><span class="bk-key">Area</span><span class="bk-val">VIP Oceanfront Daybed + Sunset Theater</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ QR GRID ═══════════════════════ -->
+<div class="booking-section" id="maps">
+  <div class="section-title">📍 Maps — Quick Access</div>
+  <div class="qr-grid">
+    <div class="qr-item"><img data-qr="dps" alt=""><div class="qr-name">Airport</div><div class="qr-day">All days</div></div>
+    <div class="qr-item"><img data-qr="sthala" alt=""><div class="qr-name">Sthala Ubud</div><div class="qr-day">Jul 25–27</div></div>
+    <div class="qr-item"><img data-qr="seniman" alt=""><div class="qr-name">Seniman Coffee</div><div class="qr-day">Day 2</div></div>
+    <div class="qr-item"><img data-qr="monkeyforest" alt=""><div class="qr-name">Monkey Forest</div><div class="qr-day">Day 2</div></div>
+    <div class="qr-item"><img data-qr="wamm" alt=""><div class="qr-name">WAMM</div><div class="qr-day">Day 2</div></div>
+    <div class="qr-item"><img data-qr="batubara" alt=""><div class="qr-name">Batubara</div><div class="qr-day">Day 2</div></div>
+    <div class="qr-item"><img data-qr="batuan" alt=""><div class="qr-name">Pura Batuan</div><div class="qr-day">Day 3</div></div>
+    <div class="qr-item"><img data-qr="blacksand" alt=""><div class="qr-name">Black Sand</div><div class="qr-day">Day 3</div></div>
+    <div class="qr-item"><img data-qr="renaissance" alt=""><div class="qr-name">Renaissance</div><div class="qr-day">Jul 27–30</div></div>
+    <div class="qr-item"><img data-qr="gwk" alt=""><div class="qr-name">GWK Park</div><div class="qr-day">Day 4</div></div>
+    <div class="qr-item"><img data-qr="bgs" alt=""><div class="qr-name">BGS Coffee</div><div class="qr-day">Day 4</div></div>
+    <div class="qr-item"><img data-qr="uluwatu" alt=""><div class="qr-name">Uluwatu Temple</div><div class="qr-day">Day 4</div></div>
+    <div class="qr-item"><img data-qr="mason" alt=""><div class="qr-name">MASON.</div><div class="qr-day">Day 4</div></div>
+    <div class="qr-item"><img data-qr="cashew" alt=""><div class="qr-name">Cashew Tree</div><div class="qr-day">Day 4–5</div></div>
+    <div class="qr-item"><img data-qr="elkabron" alt=""><div class="qr-name">El Kabron</div><div class="qr-day">Day 5</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ TIPS ═══════════════════════ -->
+<div class="booking-section" id="tips">
+  <div class="section-title">💡 Good to Know</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🛵</div>
+      <div class="tip-content">
+        <div class="tip-title">Scooter Rental (Day 4)</div>
+        <p>Arrange with Renaissance concierge the evening of Day 3. Bring your international license. Helmet required. Wear sunscreen — it's exposed riding around Uluwatu.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🧣</div>
+      <div class="tip-content">
+        <div class="tip-title">Temple Dress Code</div>
+        <p>Bring a sarong for temple visits (Batuan, Uluwatu). Most temples loan or sell them at the entrance. Covered knees and shoulders are required.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <div class="tip-content">
+        <div class="tip-title">Cash & Cards</div>
+        <p>IDR cash is handy for waru ngs, temples, tips, and scooter fuel. ATMs at DPS airport or near hotels. Major restaurants accept Visa/Mastercard.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🚗</div>
+      <div class="tip-content">
+        <div class="tip-title">Grab App</div>
+        <p>Download Grab (Southeast Asia's Uber) before arrival. Good for casual transfers where no private car is arranged. Make sure your Singaporean/Thai SIM or local SIM works for data.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">✦</div>
+      <div class="tip-content">
+        <div class="tip-title">Marriott Titanium Perks</div>
+        <p>Mention Titanium at both hotel check-ins. Expect: room upgrades, lounge access, welcome amenity, late checkout (request up to 16:00). At Double Ikat — mention Titanium for table acknowledgement.</p>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🌤️</div>
+      <div class="tip-content">
+        <div class="tip-title">July Weather</div>
+        <p>July is Bali's dry season — sunny, low humidity, warm (~27–30°C). Almost zero rain. Perfect beach and outdoor weather. Pack light breathable clothing and reef-safe sunscreen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-flag">🌴</div>
+  <div>Bali 2026 · Champ's Chillax Trip</div>
+  <div style="margin-top:4px; color: #9CA3AF;">25–30 July · Singapore Airlines · Marriott Titanium ✦</div>
+</div>
+
+<script>
+// ── QR Codes ──
+const qrLocations = {
+  dps: "https://maps.google.com/?q=Ngurah+Rai+International+Airport+Bali",
+  sthala: "https://maps.google.com/?q=Sthala+Tribute+Portfolio+Hotel+Ubud+Bali",
+  seniman: "https://maps.google.com/?q=Seniman+Coffee+Studio+Ubud+Bali",
+  monkeyforest: "https://maps.google.com/?q=Nyuh+Kuning+Gate+Sacred+Monkey+Forest+Ubud+Bali",
+  wamm: "https://maps.google.com/?q=WAMM+Ubud+Bali",
+  batubara: "https://maps.google.com/?q=Batubara+Wood+Fire+Ubud+Bali",
+  batuan: "https://maps.google.com/?q=Pura+Puseh+Desa+Batuan+Bali",
+  blacksand: "https://maps.google.com/?q=Black+Sand+Brewery+Canggu+Bali",
+  renaissance: "https://maps.google.com/?q=Renaissance+Bali+Uluwatu+Resort+Spa",
+  doubleikat: "https://maps.google.com/?q=Double+Ikat+Restaurant+Renaissance+Uluwatu+Bali",
+  gwk: "https://maps.google.com/?q=GWK+Cultural+Park+Bali",
+  bgs: "https://maps.google.com/?q=BGS+Bali+Coffee+Uluwatu",
+  cashew: "https://maps.google.com/?q=The+Cashew+Tree+Uluwatu+Bali",
+  uluwatu: "https://maps.google.com/?q=Pura+Luhur+Uluwatu+Temple+Bali",
+  mason: "https://maps.google.com/?q=MASON+Uluwatu+Bali",
+  elkabron: "https://maps.google.com/?q=El+Kabron+Cliff+Restaurant+Uluwatu+Bali"
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  Object.entries(qrLocations).forEach(([key, url]) => {
+    document.querySelectorAll('[data-qr="' + key + '"]').forEach(el => {
+      el.src = 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=' + encodeURIComponent(url) + '&color=1B6B45&bgcolor=FFFFFF&qzone=2';
+      el.addEventListener('click', () => window.open(url, '_blank'));
+      el.style.cursor = 'pointer';
+    });
+  });
+});
+
+// ── Sticky Nav Active State ──
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.day-tab');
+  const sections = document.querySelectorAll('[data-day]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const day = entry.target.getAttribute('data-day');
+        tabs.forEach(t => t.classList.remove('active'));
+        const activeTab = document.querySelector('.day-tab[href="#day' + day + '"]');
+        if (activeTab) {
+          activeTab.classList.add('active');
+          activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+});
+</script>
+</body>
+</html>
