@@ -57,8 +57,16 @@
   .flights{display:grid;gap:12px;margin-top:8px}
   .flight{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
   .flight .lab{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);font-weight:600}
-  .flight .route{font-family:'Fraunces',serif;font-size:1.18rem;margin-top:6px;font-weight:500}
-  .flight .leg{font-size:.85rem;color:var(--ink-soft);margin-top:3px}
+  .tlx{display:flex;align-items:flex-start;margin-top:14px}
+  .node{flex:0 0 auto;text-align:center;min-width:60px}
+  .node.mid{min-width:126px}
+  .node .dot{width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--clay);margin:0 auto}
+  .node .city{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;margin-top:6px}
+  .node .tm{font-size:.9rem;color:var(--ink);font-weight:500;white-space:nowrap}
+  .node .tm .dur{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 3px}
+  .seg{flex:1;position:relative;margin-top:4px}
+  .seg .ln{height:2px;background:var(--line)}
+  .seg .sm{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:.78rem;color:var(--clay);font-weight:600;white-space:nowrap}
 
   /* ---------- HOTELS ---------- */
   .hotels{display:grid;gap:14px;margin-top:6px}
@@ -114,7 +122,7 @@
   .rule.dot{background:none;text-align:center;color:var(--gold);font-size:.9rem;letter-spacing:1em}
 
   /* ---------- GENERIC SECTION ---------- */
-  .block{padding:34px 26px}
+  .block{padding:34px 26px;scroll-margin-top:60px}
   .block h2{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:500;margin-bottom:6px}
   .block .sub{font-size:.85rem;color:var(--ink-soft);margin-bottom:20px}
 
@@ -125,17 +133,6 @@
   .bk .name{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:500}
   .bk .row{font-size:.84rem;color:var(--ink-soft);margin-top:5px;display:flex;justify-content:space-between;gap:14px}
   .bk .row b{color:var(--ink);font-weight:500;text-align:right}
-
-  /* changes callout */
-  .changes{background:linear-gradient(135deg,#1d3f38,#173b34);color:#f3ece0;border-radius:18px;padding:24px 22px;margin:0 26px;box-shadow:var(--shadow)}
-  .changes h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:500;margin-bottom:14px}
-  .changes .grp{margin-bottom:16px}
-  .changes .glab{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:7px;opacity:.85}
-  .changes .glab.cancel{color:#e9a48a}
-  .changes .glab.add{color:#e7c87a}
-  .changes ul{list-style:none}
-  .changes li{font-size:.88rem;padding:4px 0 4px 18px;position:relative;opacity:.95}
-  .changes li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:currentColor}
 
   /* maps grid */
   .maps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
@@ -149,6 +146,13 @@
   .kc .kt{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;display:flex;gap:9px;align-items:center;margin-bottom:6px}
   .kc p{font-size:.86rem;color:var(--ink-soft)}
 
+  a.hotel{display:block;color:#fdf8ee;text-decoration:none}
+  .hotel .mapchip{position:absolute;bottom:16px;right:18px;font-size:.7rem;letter-spacing:.1em;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 10px}
+  a.badge{text-decoration:underline dashed;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}
+  .bk{scroll-margin-top:64px}
+  .bk:target{animation:bkflash 1.8s ease}
+  @keyframes bkflash{0%,35%{box-shadow:0 0 0 2px var(--clay),var(--shadow)}100%{box-shadow:var(--shadow)}}
   footer{text-align:center;padding:40px 26px 56px;color:var(--ink-soft)}
   footer .ft{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--ink)}
   footer .fd{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
@@ -177,14 +181,24 @@
   <section class="section-pad">
     <div class="flights">
       <div class="flight fade d1">
-        <div class="lab">✈ Outbound · Sat 25 Jul</div>
-        <div class="route">SQ707 · BKK 12:15 → SIN 15:50</div>
-        <div class="leg">↳ connect 1h 55m · SQ946 SIN 17:45 → DPS 20:25 · 25kg</div>
+        <div class="lab">✈ Outbound · Sat 25 Jul · 25kg</div>
+        <div class="tlx">
+          <div class="node"><div class="dot"></div><div class="city">BKK</div><div class="tm">12:15</div></div>
+          <div class="seg"><div class="ln"></div><div class="sm">SQ707</div></div>
+          <div class="node mid"><div class="dot"></div><div class="city">SIN</div><div class="tm">15:50<span class="dur">1h 55m</span>17:45</div></div>
+          <div class="seg"><div class="ln"></div><div class="sm">SQ946</div></div>
+          <div class="node"><div class="dot"></div><div class="city">DPS</div><div class="tm">20:25</div></div>
+        </div>
       </div>
       <div class="flight fade d2">
-        <div class="lab">✈ Return · Sat 1 Aug</div>
-        <div class="route">SQ939 · DPS 13:15 → SIN 16:00</div>
-        <div class="leg">↳ connect 1h 30m · SQ714 SIN 17:30 → BKK 19:00 · 30kg</div>
+        <div class="lab">✈ Return · Sat 1 Aug · 30kg</div>
+        <div class="tlx">
+          <div class="node"><div class="dot"></div><div class="city">DPS</div><div class="tm">13:15</div></div>
+          <div class="seg"><div class="ln"></div><div class="sm">SQ939</div></div>
+          <div class="node mid"><div class="dot"></div><div class="city">SIN</div><div class="tm">16:00<span class="dur">1h 30m</span>17:30</div></div>
+          <div class="seg"><div class="ln"></div><div class="sm">SQ714</div></div>
+          <div class="node"><div class="dot"></div><div class="city">BKK</div><div class="tm">19:00</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -192,18 +206,20 @@
   <!-- HOTELS -->
   <section class="section-pad">
     <div class="hotels">
-      <div class="hotel ubud fade d1">
+      <a class="hotel ubud fade d1" href="https://maps.google.com/?q=Sthala+Ubud+Tribute+Portfolio">
         <span class="tier">Titanium ✦</span>
         <div class="emoji">🌿</div>
         <h3>Sthala, a Tribute Portfolio Hotel</h3>
         <div class="meta">Jul 25–27 · 2 nights · Ubud</div>
-      </div>
-      <div class="hotel rc fade d2">
+        <span class="mapchip">📍 Map</span>
+      </a>
+      <a class="hotel rc fade d2" href="https://maps.google.com/?q=The+Ritz-Carlton+Bali+Nusa+Dua">
         <span class="tier">Titanium ✦</span>
         <div class="emoji">🌊</div>
         <h3>The Ritz-Carlton, Bali</h3>
         <div class="meta">Jul 27 – Aug 1 · 5 nights · Sawangan Junior Suite, Nusa Dua</div>
-      </div>
+        <span class="mapchip">📍 Map</span>
+      </a>
     </div>
   </section>
 
@@ -220,6 +236,7 @@
       <a href="#day8">Sat 1</a>
       <a href="#bookings">Bookings</a>
       <a href="#maps">Maps</a>
+      <a href="#info">Info</a>
     </div>
   </nav>
 
@@ -239,7 +256,7 @@
         <div class="time">🚗 ~21:00</div>
         <h4><span class="ic">🚗</span>Private Transfer → Ubud</h4>
         <p>Toyota Alphard, ~1.5 hrs, booked through Sthala. Sit back for the night drive up to the hills.</p>
-        <span class="badge b-ok">Pre-booked · Alphard</span>
+        <a class="badge b-ok" href="#bk-arrival">Pre-booked · Alphard</a>
       </div>
       <div class="item">
         <div class="time">🌿 ~22:30</div>
@@ -296,13 +313,13 @@
         <div class="time">💆 16:00</div>
         <h4><span class="ic">💆</span>Tahara Spa — 90 min Couples Treatment</h4>
         <p>Booked at Sthala for 2 pax, jungle-view room. The perfect afternoon reset.</p>
-        <span class="badge b-ok">Booked · 2 Adults · Jungle View</span>
+        <a class="badge b-ok" href="#bk-tahara">Booked · 2 Adults · Jungle View</a>
       </div>
       <div class="item">
         <div class="time">🔥 19:00</div>
         <h4><span class="ic">🔥</span>Dinner — Batubara Wood Fire</h4>
         <p>Live-fire cooking, beautiful plating, excellent cocktails. One of Ubud's most atmospheric dinners.</p>
-        <span class="badge b-ok">Reserved · 19:00</span>
+        <a class="badge b-ok" href="#bk-batubara">Reserved · 19:00</a>
         <a class="pin" href="https://maps.google.com/?q=Batubara+Wood+Fire+Ubud">📍 Batubara</a>
       </div>
     </div>
@@ -324,9 +341,9 @@
       <div class="item">
         <div class="time">🚗 11:30</div>
         <h4><span class="ic">🚗</span>Depart Sthala — Private Car</h4>
-        <p>Route: Sthala → Batuan → Sanur (lunch + coffee) → The Ritz-Carlton. 6-hr premium charter, driver waits at each stop.</p>
-        <div class="tip">💡 Free-cancel until 25 Jul — holding it while you compare a Sthala charter quote. Either way, sorted.</div>
-        <span class="badge b-ok">Booked · Klook #NSW504313</span>
+        <p>Route: Sthala → Batuan → Sanur (lunch + coffee) → The Ritz-Carlton. RC hourly charter, Toyota Vellfire, driver waits at each stop.</p>
+        <div class="tip">💡 6-hr window runs to ~15:30 — keep the Sanur lunch relaxed, not endless.</div>
+        <a class="badge b-ok" href="#bk-charter27">Confirmed · RC Vellfire</a>
       </div>
       <div class="item">
         <div class="time">🏛️ ~11:50</div>
@@ -335,29 +352,29 @@
         <a class="pin" href="https://maps.google.com/?q=Pura+Puseh+Desa+Batuan">📍 Pura Puseh Batuan</a>
       </div>
       <div class="item">
-        <div class="time">🍽️ ~12:45 PM</div>
+        <div class="time">🍽️ ~12:45</div>
         <h4><span class="ic">🍲</span>Lunch — Warung Mak Beng (Sanur)</h4>
         <p>Sanur sits right on the route south — no detour. A legendary one-dish institution: fried fish, fragrant fish soup, rice and sambal. Fast, cheap, beloved. Walk-in, no booking.</p>
         <a class="pin" href="https://maps.google.com/?q=Warung+Mak+Beng+Sanur">📍 Warung Mak Beng</a>
       </div>
       <div class="item">
-        <div class="time">☕ ~1:45 PM</div>
+        <div class="time">☕ ~13:45</div>
         <h4><span class="ic">☕</span>Coffee Therapy Sanur</h4>
         <p>A serious specialty spot (pour-overs, espresso) a few minutes away. Your coffee fix before the last leg. Walk-in.</p>
         <a class="pin" href="https://maps.google.com/?q=Coffee+Therapy+Sanur">📍 Coffee Therapy</a>
       </div>
       <div class="item">
-        <div class="time">🌊 ~3:10</div>
+        <div class="time">🌊 ~15:10</div>
         <h4><span class="ic">🌊</span>Check-in — The Ritz-Carlton, Bali</h4>
-        <p>Easy ~40 min south from Sanur. Check in as Titanium Elite — Sawangan Junior Suite, balcony, 1 King. Mention Titanium for an upgrade + welcome amenity, then ease down to the lagoon pool or beach.</p>
-        <span class="badge b-ok">Confirmed · #84437487 + #73979257 · 5 nights</span>
+        <p>Easy ~40 min south from Sanur. Check in as Titanium Elite — Sawangan Junior Suite, balcony, 1 King. Your room preferences and upgrade note are already with the team, so just enjoy the welcome, then ease down to the lagoon pool or beach.</p>
+        <a class="badge b-ok" href="#bk-rc">Confirmed · #84437487 + #73979257 · 5 nights</a>
         <a class="pin" href="https://maps.google.com/?q=The+Ritz-Carlton+Bali+Nusa+Dua">📍 The Ritz-Carlton, Bali</a>
       </div>
       <div class="item">
         <div class="time">🍽️ 18:30</div>
         <h4><span class="ic">🍤</span>Dinner — Missoni Resort Club (Breezes)</h4>
         <p>On-property beachfront tapas lounge — zero driving after a travel day. Light, vibrant sharing plates, sunset over the Indian Ocean, sometimes an outdoor movie later. The first proper exhale of the resort leg.</p>
-        <span class="badge b-ok">Confirmed · DPSSW-5HNKE2MLDWBL</span>
+        <a class="badge b-ok" href="#bk-missoni">Confirmed · DPSSW-5HNKE2MLDWBL</a>
       </div>
     </div>
   </section>
@@ -378,7 +395,7 @@
       <div class="item soft">
         <div class="time">🏊 Late morning</div>
         <h4><span class="ic">🏊</span>Lagoon Pool &amp; Beach</h4>
-        <p>The clifftop lagoon pool overlooks the ocean; the white-sand beach is a short ride down. Optional complimentary yoga if you're feeling virtuous.</p>
+        <p>The lagoon pool wraps right around your wing, and the white-sand beach is steps away on the same level — the glass inclinator up to the clifftop is for the lobby and bar. Optional complimentary yoga if you're feeling virtuous.</p>
       </div>
       <div class="item soft">
         <div class="time">☕ If you wander out</div>
@@ -397,8 +414,8 @@
         <div class="time">🍽️ 18:00</div>
         <h4><span class="ic">🍽️</span>Dinner — Bejana (Signature)</h4>
         <p>The clifftop Indonesian room — the reason for the whole reshuffle. Terrace table on the wooden deck over the ocean, timed for sunset. Interested in the Archipelago Rijsttafel — a shared rice-table feast for two.</p>
-        <div class="tip">💡 Under your first booking, so the 25% F&amp;B discount applies — food only, not alcohol.</div>
-        <span class="badge b-ok">Confirmed · DPSSW-5HNJ89TEHBXB · terrace</span>
+        <div class="tip">💡 25% F&amp;B discount applies here — food only.</div>
+        <a class="badge b-ok" href="#bk-bejana">Confirmed · DPSSW-5HNJ89TEHBXB · terrace</a>
         <a class="pin" href="https://maps.google.com/?q=Bejana+Ritz-Carlton+Bali">📍 Bejana</a>
       </div>
     </div>
@@ -427,14 +444,14 @@
         <div class="time">🏖️ 13:00</div>
         <h4><span class="ic">🏖️</span>El Kabron — VIP Oceanfront Daybed</h4>
         <p>Your private daybed perched above the Indian Ocean. Infinity views, dedicated service, drinks and tapas. Stay as long as you like.</p>
-        <span class="badge b-dep">Deposit Paid · 2 Adults</span>
+        <a class="badge b-dep" href="#bk-elkabron">Deposit Paid · 2 Adults</a>
         <a class="pin" href="https://maps.google.com/?q=El+Kabron+Bali">📍 El Kabron</a>
       </div>
       <div class="item">
         <div class="time">🌅 ~18:00</div>
         <h4><span class="ic">🌅</span>Sunset Theater — Dining Table</h4>
         <p>Slide from daybed to dinner as the sun drops. Mediterranean-Balinese menu, big wine list, golden-hour views. The perfect Bali evening — no moving required.</p>
-        <span class="badge b-dep">Booked · Deposit Paid</span>
+        <a class="badge b-dep" href="#bk-elkabron">Booked · Deposit Paid</a>
       </div>
       <div class="item soft">
         <div class="time">🚗 When you're ready</div>
@@ -455,9 +472,8 @@
       <div class="item">
         <div class="time">🚗 11:30</div>
         <h4><span class="ic">🚗</span>Private Driver — Full Day</h4>
-        <p>Klook private car charter (up to 6), 12 hours, hotel pickup at 11:30 — a comfortable MPV for the tight Uluwatu lanes, at less than half RC's full-day quote. Driver coordinates by WhatsApp.</p>
-        <div class="tip">💡 Free cancellation until 29 Jul. WhatsApp the driver the day before to confirm the 11:30 lobby pickup and share your stop list.</div>
-        <span class="badge b-ok">Booked · Klook UFV036984</span>
+        <p>RC hourly charter, Toyota Innova Zenix (hybrid), 12 hours, pickup from the resort's main lobby at 11:30 — driver at your disposal all day for the Bukit loop.</p>
+        <a class="badge b-ok" href="#bk-charter30">Confirmed · RC Innova Zenix</a>
       </div>
       <div class="item">
         <div class="time">🍽️ ~12:15</div>
@@ -466,13 +482,13 @@
         <a class="pin" href="https://maps.google.com/?q=Yeye's+Warung+Uluwatu">📍 Yeye's Warung</a>
       </div>
       <div class="item">
-        <div class="time">☕ ~2:45</div>
+        <div class="time">☕ ~14:45</div>
         <h4><span class="ic">☕</span>Suka Espresso — Coffee &amp; Snack</h4>
         <p>Short hop back up Labuansait. Excellent coffee, easy snack, great people-watching. Walk-in — go after the breakfast rush.</p>
         <a class="pin" href="https://maps.google.com/?q=Suka+Espresso+Uluwatu">📍 Suka Espresso</a>
       </div>
       <div class="item">
-        <div class="time">🛕 ~4:30</div>
+        <div class="time">🛕 ~16:30</div>
         <h4><span class="ic">🛕</span>Uluwatu Temple — Clifftop Walk</h4>
         <p>Arrive early to walk the dramatic clifftop temple paths before the show, and grab good seats for Kecak.</p>
         <div class="tip">💡 Mind the monkeys — they genuinely snatch sunglasses and phones. Sarong provided at the gate.</div>
@@ -482,14 +498,14 @@
         <div class="time">🔥 18:00</div>
         <h4><span class="ic">🔥</span>Kecak &amp; Fire Dance</h4>
         <p>The iconic chant-and-fire performance on the cliff edge as the sun sets behind it. ~1 hour. Tickets booked.</p>
-        <span class="badge b-ok">Booked · Klook BMS545704</span>
+        <a class="badge b-ok" href="#bk-kecak">Booked · Klook BMS545704</a>
       </div>
       <div class="item">
         <div class="time">🍴 19:45</div>
         <h4><span class="ic">🍴</span>Dinner — ULU Garden (Fire &amp; Wood)</h4>
         <p>Authentic Indonesian in a leafy garden with live music — and you've landed on their special Thursday open-fire night. Refined yet relaxed, with variety. Then back to RC.</p>
         <div class="tip">💡 15-min table hold — WhatsApp them if the temple exit runs long.</div>
-        <span class="badge b-ok">Booked · #3BT9VT4B2EMZ · 2 pax</span>
+        <a class="badge b-ok" href="#bk-ulu">Booked · #3BT9VT4B2EMZ · 2 pax</a>
         <a class="pin" href="https://maps.google.com/?q=ULU+Garden+Uluwatu">📍 ULU Garden</a>
       </div>
     </div>
@@ -512,20 +528,20 @@
         <div class="time">🧖 14:00</div>
         <h4><span class="ic">🧖</span>Hydro Vital Pool + Wet Areas</h4>
         <p>Hydro Vital Pool booked for the two of you at 2:00 PM. After ~an hour, move on to the jacuzzi, steam &amp; sauna — bring swimsuits. The perfect warm-up before the treatment.</p>
-        <span class="badge b-ok">Booked · 2:00 PM · 2 pax</span>
+        <a class="badge b-ok" href="#bk-spa">Booked · 14:00 · 2 pax</a>
       </div>
       <div class="item">
         <div class="time">💆 15:30</div>
         <h4><span class="ic">💆</span>Escape to Romance — Couples Villa</h4>
         <p>120 min in a private spa villa: foot ritual, full-body massage, exfoliation, then sparkling wine + Balinese chocolates in a shared Luster Pearl bath. The romantic high note of the trip.</p>
-        <div class="tip">💡 Pick your massage style with the therapist on the day. 6-hr cancellation policy.</div>
-        <span class="badge b-ok">Confirmed · 15:30 · 120 min</span>
+        <div class="tip">💡 Pick your massage style with the therapist on the day.</div>
+        <a class="badge b-ok" href="#bk-spa">Confirmed · 15:30 · 120 min</a>
       </div>
       <div class="item">
         <div class="time">🦞 19:00</div>
         <h4><span class="ic">🦞</span>Finale — The Beach Grill (5-Course Tasting)</h4>
-        <p>Chef's five-course tasting menu, toes near the sand. A refined, unhurried send-off after the spa. Relaxed dress.</p>
-        <span class="badge b-ok">Confirmed · DPSSW-5HNK9XZWM3MJ</span>
+        <p>Chef's five-course seafood tasting, toes near the sand — a different register from last night's open fire: delicate, ocean-led courses and a refined, unhurried send-off after the spa. Relaxed dress.</p>
+        <a class="badge b-ok" href="#bk-beachgrill">Confirmed · DPSSW-5HNK9XZWM3MJ</a>
         <a class="pin" href="https://maps.google.com/?q=The+Beach+Grill+Ritz-Carlton+Bali">📍 The Beach Grill</a>
       </div>
     </div>
@@ -553,8 +569,7 @@
         <div class="time">🚗 10:15</div>
         <h4><span class="ic">🚗</span>Transfer to Ngurah Rai (DPS)</h4>
         <p>Toyota Vellfire, RC main lobby → airport (~30–45 min). Confirmed via concierge, charged to the room. SQ939 departs 13:15.</p>
-        <div class="tip">💡 3-hr cancellation policy. ~2.5 hrs at the airport — sensible for a peak-season international flight.</div>
-        <span class="badge b-ok">Confirmed · Vellfire · 10:15</span>
+        <a class="badge b-ok" href="#bk-departure">Confirmed · Vellfire · 10:15</a>
         <a class="pin" href="https://maps.google.com/?q=Ngurah+Rai+International+Airport+Bali">📍 Ngurah Rai Airport</a>
       </div>
       <div class="item soft">
@@ -567,132 +582,106 @@
 
   <div class="rule"></div>
 
-  <!-- BOOKING STATUS -->
-  <section class="block" id="changes">
-    <h2>Booking Status</h2>
-    <p class="sub">Everything's booked — just the same-room link being finalised.</p>
-    <div class="changes">
-      <h3>Where things stand</h3>
-      <div class="grp">
-        <div class="glab" style="color:#e7c87a">⧗ In progress</div>
-        <ul style="color:#f0e3c0">
-          <li>Same-room link across both bookings (RC arranging)</li>
-        </ul>
-      </div>
-      <div class="grp">
-        <div class="glab" style="color:#bfe3c4">✓ Locked</div>
-        <ul style="color:#dcebd9">
-          <li>Flights · both hotels · arrival transfer · Day-27 charter</li>
-          <li>Dining: Missoni (27) · Bejana (28) · Beach Grill (31)</li>
-          <li>Uluwatu charter (30) · ULU Garden (30) · Kecak (30)</li>
-          <li>El Kabron (29, deposit) · Tahara spa &amp; Batubara (26)</li>
-          <li>RC spa — Escape to Romance (31, 3:30 PM)</li>
-          <li>Departure transfer — Vellfire, RC → DPS (1 Aug, 10:15)</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
   <!-- BOOKINGS -->
   <section class="block" id="bookings">
     <h2>All Bookings</h2>
     <p class="sub">Quick reference for the trip.</p>
 
-    <div class="bk">
+    <div class="bk" id="bk-flights">
       <div class="top"><span class="name">✈️ Flights — Singapore Airlines</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>Reference</span><b>FKD5WN · 2 pax</b></div>
       <div class="row"><span>Out · Sat 25</span><b>SQ707 / SQ946 → DPS 20:25 · 25kg</b></div>
       <div class="row"><span>Return · Sat 1 Aug</span><b>SQ939 13:15 / SQ714 → BKK 19:00 · 30kg</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-sthala">
       <div class="top"><span class="name">🌿 Sthala, Ubud</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>Dates</span><b>Jul 25–27 · 2 nights</b></div>
+      <div class="row"><span>Breakfast</span><b>Not in rate — choose it as the Titanium welcome gift (for 2) at check-in</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-arrival">
       <div class="top"><span class="name">🚗 Airport Transfer</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>Vehicle</span><b>Toyota Alphard (Sthala)</b></div>
       <div class="row"><span>Route</span><b>DPS → Sthala Ubud · ~20:25, Jul 25</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-tahara">
       <div class="top"><span class="name">💆 Tahara Spa</span><span class="badge b-ok">Booked</span></div>
       <div class="row"><span>When</span><b>Sun 26 Jul · 16:00 · 90 min</b></div>
       <div class="row"><span>Pax</span><b>2 · Jungle View</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-batubara">
       <div class="top"><span class="name">🔥 Batubara Wood Fire</span><span class="badge b-ok">Reserved</span></div>
       <div class="row"><span>When</span><b>Sun 26 Jul · 19:00 · Ubud</b></div>
     </div>
 
-    <div class="bk">
-      <div class="top"><span class="name">🚗 Private Car Charter</span><span class="badge b-ok">Booked</span></div>
-      <div class="row"><span>Reference</span><b>Klook #NSW504313</b></div>
+    <div class="bk" id="bk-charter27">
+      <div class="top"><span class="name">🚗 Private Car Charter</span><span class="badge b-ok">Confirmed</span></div>
+      <div class="row"><span>Provider</span><b>RC hourly charter · Vellfire · IDR 2,100k</b></div>
       <div class="row"><span>Route</span><b>Sthala · Batuan · Sanur · RC</b></div>
       <div class="row"><span>Pickup</span><b>Mon 27 Jul · 11:30 · 6 hrs</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-rc">
       <div class="top"><span class="name">🌊 The Ritz-Carlton, Bali</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>Confirmation</span><b>#84437487 + #73979257</b></div>
       <div class="row"><span>Dates</span><b>Jul 27 – Aug 1 · 5 nights</b></div>
       <div class="row"><span>Room</span><b>Sawangan Junior Suite · 1 King</b></div>
       <div class="row"><span>Link rooms</span><b>Requested</b></div>
+      <div class="row"><span>Breakfast</span><b>Not included — no RC elite benefit; pay at Senses (ask if 25% F&amp;B applies)</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-missoni">
       <div class="top"><span class="name">🍤 Missoni Resort Club</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Mon 27 Jul · 18:30</b></div>
       <div class="row"><span>Ref</span><b>DPSSW-5HNKE2MLDWBL</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-bejana">
       <div class="top"><span class="name">🍽️ Bejana Dinner</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Tue 28 Jul · 18:00 · terrace</b></div>
       <div class="row"><span>Ref</span><b>DPSSW-5HNJ89TEHBXB</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-elkabron">
       <div class="top"><span class="name">🌊 El Kabron</span><span class="badge b-dep">Deposit Paid</span></div>
       <div class="row"><span>When</span><b>Wed 29 Jul · 13:00 · 2 Adults</b></div>
       <div class="row"><span>Area</span><b>VIP Daybed + Sunset Theater</b></div>
     </div>
 
-    <div class="bk">
-      <div class="top"><span class="name">🚗 Uluwatu Day Charter</span><span class="badge b-ok">Booked</span></div>
+    <div class="bk" id="bk-charter30">
+      <div class="top"><span class="name">🚗 Uluwatu Day Charter</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Thu 30 Jul · 11:30 · 12 hrs</b></div>
-      <div class="row"><span>Ref</span><b>Klook UFV036984 · up to 6 pax</b></div>
+      <div class="row"><span>Provider</span><b>RC hourly charter · Innova Zenix · IDR 2,440k</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-kecak">
       <div class="top"><span class="name">🔥 Kecak &amp; Fire Dance</span><span class="badge b-ok">Booked</span></div>
       <div class="row"><span>When</span><b>Thu 30 Jul · 18:00 · Uluwatu Temple</b></div>
       <div class="row"><span>Ref</span><b>Klook BMS545704</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-ulu">
       <div class="top"><span class="name">🍴 ULU Garden</span><span class="badge b-ok">Booked</span></div>
       <div class="row"><span>When</span><b>Thu 30 Jul · 19:45 · 2 pax</b></div>
       <div class="row"><span>Ref</span><b>#3BT9VT4B2EMZ · Fire &amp; Wood</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-spa">
       <div class="top"><span class="name">💆 RC Spa — Escape to Romance</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Fri 31 Jul · 15:30 · 120 min</b></div>
       <div class="row"><span>Before</span><b>Hydro Pool booked · 2:00 PM · 2 pax</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-beachgrill">
       <div class="top"><span class="name">🦞 The Beach Grill</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Fri 31 Jul · 19:00 · 5-course tasting</b></div>
       <div class="row"><span>Ref</span><b>DPSSW-5HNK9XZWM3MJ</b></div>
     </div>
 
-    <div class="bk">
+    <div class="bk" id="bk-departure">
       <div class="top"><span class="name">🚗 Departure Transfer</span><span class="badge b-ok">Confirmed</span></div>
       <div class="row"><span>When</span><b>Sat 1 Aug · 10:15 · Vellfire</b></div>
       <div class="row"><span>Route</span><b>RC → DPS · IDR 950k, to room</b></div>
@@ -728,7 +717,7 @@
   <div class="rule"></div>
 
   <!-- GOOD TO KNOW -->
-  <section class="block">
+  <section class="block" id="info">
     <h2>Good to Know</h2>
     <p class="sub">A few notes for the resort leg.</p>
     <div class="know">
@@ -742,7 +731,7 @@
       </div>
       <div class="kc">
         <div class="kt">✦ Marriott Titanium</div>
-        <p>They've already flagged your status. Expect upgrades, lounge access, a welcome amenity, and late checkout (request up to 16:00 on the 1st). At RC the recognition is part of the experience — no need to say it twice.</p>
+        <p>They've already flagged your status and your room preferences are with the team. This property is known to be generous with upgrades for Titanium — but they're never guaranteed, so treat one as a happy bonus. Expect a welcome amenity and late checkout (request up to 16:00 on the 1st). Note: the Club Lounge here is a paid add-on, not a Bonvoy benefit.</p>
       </div>
       <div class="kc">
         <div class="kt">🛕 Two Temples</div>
@@ -761,7 +750,7 @@
 
   <footer>
     <div class="ft">Slow days, good wine, better sunsets.</div>
-    <div class="fd">Bali 2026 · 25 July – 1 August · Singapore Airlines · Marriott Titanium ✦</div>
+    <div class="fd">Bali 2026 · 25 July – 1 August</div>
   </footer>
 
 </div>
